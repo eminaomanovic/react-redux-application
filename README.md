@@ -1,2 +1,1 @@
-# react-redux-application
-Unit tests presentation
+<p>Unit tests presentation</p>
