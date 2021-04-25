@@ -8,7 +8,7 @@ import configureStore from '../../../configureStore';
 
 describe('<App />', () => {
   const store = configureStore();
-  it('React testing library: Test input in search box ', () => {
+  it('React testing library: Find div', () => {
     const { getByTestId } = render(
       <Provider store={store}>
         <App />
@@ -18,7 +18,7 @@ describe('<App />', () => {
     expect(input).toBeDefined();
   });
 
-  it('Enzyme: Test input in search box ', () => {
+  it('Enzyme: Find div', () => {
     const wrapper = mount(
       <Provider store={store}>
         <App />

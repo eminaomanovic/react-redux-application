@@ -9,7 +9,7 @@ import { videoListProps } from '../../../utils/mocks';
 
 describe('<VideoList />', () => {
   const store = configureStore();
-  it('React testing library: Test input in search box ', () => {
+  it('React testing library: Find div with class', () => {
     const { container } = render(
       <Provider store={store}>
         <VideoList {...videoListProps} />
@@ -18,7 +18,7 @@ describe('<VideoList />', () => {
     expect(container.firstChild.classList).toContain('d-flex');
   });
 
-  it('Enzyme: Test input in search box ', () => {
+  it('Enzyme: Find div with class', () => {
     const wrapper = mount(
       <Provider store={store}>
         <VideoList {...videoListProps} />

@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import './VideoItem.css';
 import PropTypes from 'prop-types';
 import { Link, Router } from 'react-router-dom';
 import history from '../../utils/history';
