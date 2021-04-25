@@ -1,37 +1,27 @@
+import { fromJS } from 'immutable';
 import { selectGlobal, makeSelectLoading, makeSelectError } from '../selectors';
 
 describe('selectGlobal', () => {
+  const loadingSelector = makeSelectLoading();
+  const errorSelector = makeSelectError();
+  const mockedState = fromJS({
+    loading: false,
+    error: false,
+  });
+
   it('should select the global state', () => {
-    const globalState = {};
-    const mockedState = {
-      global: globalState,
+    const globalState = {
+      loading: false,
+      error: false,
     };
     expect(selectGlobal(mockedState)).toEqual(globalState);
   });
-});
-
-describe('makeSelectLoading', () => {
-  const loadingSelector = makeSelectLoading();
-  it('should select the loading', () => {
+  it('makeSelectLoading test', () => {
     const loading = false;
-    const mockedState = {
-      global: {
-        loading,
-      },
-    };
     expect(loadingSelector(mockedState)).toEqual(loading);
   });
-});
-
-describe('makeSelectError', () => {
-  const errorSelector = makeSelectError();
-  it('should select the error', () => {
-    const error = 404;
-    const mockedState = {
-      global: {
-        error,
-      },
-    };
+  it('makeSelectError test', () => {
+    const error = false;
     expect(errorSelector(mockedState)).toEqual(error);
   });
 });

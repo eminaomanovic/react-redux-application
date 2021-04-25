@@ -14,7 +14,7 @@ import { render } from '@testing-library/react';
 import { mount } from 'enzyme';
 import { assertPropTypes } from 'check-prop-types';
 import configureStore from '../../../configureStore';
-import { HomePage } from '../index';
+import { HomePage, mapDispatchToProps } from '../index';
 import { homePageProps } from '../../../utils/mocks';
 
 describe('<HomePage />', () => {
@@ -44,5 +44,20 @@ describe('<HomePage />', () => {
   });
   it('Check prop types', () => {
     assertPropTypes(HomePage.propTypes, homePageProps, 'prop', HomePage.name);
+  });
+
+  it('Test mapDispatchToProps functionality', () => {
+    const { getByRole } = render(
+      <Provider store={store}>
+        <HomePage {...homePageProps} />
+      </Provider>,
+    );
+    const dispatch = jest.fn();
+    // For the `mapDispatchToProps`, call it directly but pass in
+    // a mock function and check the arguments passed in are as expected
+    mapDispatchToProps(dispatch).onChangeTerm({ target: { value: 'new' } });
+    const input = getByRole('searchbox');
+    userEvent.type(input, 'new');
+    expect(homePageProps.onChangeTerm).toHaveBeenCalled();
   });
 });

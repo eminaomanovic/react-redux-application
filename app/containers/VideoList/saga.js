@@ -26,6 +26,7 @@ export function* getMovies() {
       ),
     );
   } catch (err) {
+    console.log(err);
     yield put(moviesLoadingError(err));
   }
 }
