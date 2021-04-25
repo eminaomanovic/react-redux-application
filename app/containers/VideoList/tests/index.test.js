@@ -8,10 +8,10 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
+import { VideoList } from '../index';
 import '../../../setupTests';
-import HomePage from '../index';
 
-describe('<HomePage />', () => {
+describe('<VideoList />', () => {
   // it('Test mapDispatchToProps functionality', () => {
   //   const { container } = render(<HomePage {...homePageProps} />);
   //   const dispatch = jest.fn();
@@ -21,7 +21,7 @@ describe('<HomePage />', () => {
   // });
 
   it('Enzyme: Check link existence', () => {
-    const component = shallow(<HomePage />);
+    const component = shallow(<VideoList />);
     expect(component.find('Link').exists()).toBeTruthy();
     expect(component.find('Link').length).toEqual(1);
   });

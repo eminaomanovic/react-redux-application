@@ -12,48 +12,17 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { loadMovies } from './actions';
+import { changeTerm } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import 'font-awesome/css/font-awesome.min.css';
-import {
-  makeSelectError,
-  makeSelectLoading,
-  makeSelectPopularMovies,
-  makeSelectPopularTvShows,
-} from './selectors';
-import LoadingIndicator from '../../components/LoadingIndicator';
-import VideoItem from '../../components/VideoItem';
+import { makeSelectTerm } from './selectors';
+import VideoList from '../VideoList/Loadable';
+import { loadMovies } from '../VideoList/actions';
 
 class HomePage extends React.PureComponent {
-  componentDidMount() {
-    this.props.getMovies();
-  }
-
-  returnData(videos) {
-    let moviesDiv = null;
-    if (videos && videos.results) {
-      moviesDiv = videos.results ? (
-        videos.results.map((video, index) => (
-          <div key={index.toString()}>
-            <VideoItem
-              key={video.id}
-              video={video}
-              onVideoSelect={this.props.onVideoSelect}
-            />
-          </div>
-        ))
-      ) : (
-        <div />
-      );
-    }
-    return moviesDiv;
-  }
-
   render() {
-    if (this.props.loading) {
-      return <LoadingIndicator />;
-    }
+    const { term, onChangeTerm } = this.props;
     return (
       <div>
         <Helmet>
@@ -64,14 +33,17 @@ class HomePage extends React.PureComponent {
           <h3 className="pl-3 pb-1 pt-2 border-bottom">
             <b>eMMovie</b>
           </h3>
-          <h5 className="pb-1 pt-2 pr-3 pl-3 border-bottom">Popular movies</h5>
-          <div className="col-md-12">
-            {this.returnData(this.props.popularMovies)}
+          <div>
+            <input
+              placeholder="Type movie name"
+              id="term"
+              className="form-control w-100 form-control-sm h-auto"
+              type="search"
+              value={term}
+              onChange={onChangeTerm}
+            />
           </div>
-          <h5 className="pb-1 pt-4 pr-3 pl-3 border-bottom">Popular series</h5>
-          <div className="col-md-12">
-            {this.returnData(this.props.popularTvShows)}
-          </div>
+          <VideoList />
         </div>
       </div>
     );
@@ -79,24 +51,21 @@ class HomePage extends React.PureComponent {
 }
 
 HomePage.propTypes = {
-  loading: PropTypes.bool,
-  getMovies: PropTypes.func,
-  popularMovies: PropTypes.object,
-  popularTvShows: PropTypes.object,
-  onVideoSelect: PropTypes.func,
+  onChangeTerm: PropTypes.func,
+  term: PropTypes.string,
 };
 
 function mapDispatchToProps(dispatch) {
   return {
-    getMovies: () => dispatch(loadMovies()),
+    onChangeTerm: e => {
+      dispatch(changeTerm(e.target.value));
+      dispatch(loadMovies());
+    },
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  loading: makeSelectLoading(),
-  error: makeSelectError(),
-  popularMovies: makeSelectPopularMovies(),
-  popularTvShows: makeSelectPopularTvShows(),
+  term: makeSelectTerm(),
 });
 
 const withConnect = connect(

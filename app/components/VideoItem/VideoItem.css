@@ -21,3 +21,16 @@
   float: right;
   box-shadow: 5px 5px 5px grey;
 }
+
+.details-title{
+  width: 220px !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.year-div {
+  width: 220px !important;
+  float: left;
+  color: #9f9f9f;
+}

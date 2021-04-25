@@ -4,32 +4,7 @@
  *
  */
 
-import {
-  CHANGE_TERM,
-  LOAD_MOVIES,
-  LOAD_MOVIES_ERROR,
-  LOAD_MOVIES_SUCCESS,
-} from './constants';
-
-export function loadMovies() {
-  return {
-    type: LOAD_MOVIES,
-  };
-}
-
-export function moviesLoadingError(error) {
-  return {
-    type: LOAD_MOVIES_ERROR,
-    error,
-  };
-}
-export function moviesLoaded(popularMovies, popularTvShows) {
-  return {
-    type: LOAD_MOVIES_SUCCESS,
-    popularMovies,
-    popularTvShows,
-  };
-}
+import { CHANGE_TERM } from './constants';
 
 export function changeTerm(term) {
   return {

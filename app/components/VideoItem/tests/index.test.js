@@ -23,6 +23,7 @@ describe('VideoItem index tests', () => {
     getAllByRole('link');
     expect(getAllByRole('link')).toHaveLength(1);
   });
+
   it('Enzyme: Check link existence', () => {
     const component = shallow(<VideoItem video={mockedVideo} />);
     expect(component.find('Link').exists()).toBeTruthy();
@@ -47,17 +48,19 @@ describe('VideoItem index tests', () => {
   });
 
   it('React testing library: should render img', () => {
-    const { getAllByRole, getByAltText } = render(
+    const { getAllByTestId, getByAltText } = render(
       <VideoItem video={mockedVideo} />,
     );
-    expect(getAllByRole('img').length).toEqual(1);
-    expect(getByAltText('Overview part')).toBeTruthy();
+    expect(getAllByTestId('video-img')).toHaveLength(1);
+    getByAltText('Overview part');
   });
 
   it('Enzyme: should render img', () => {
     const component = shallow(<VideoItem video={mockedVideo} />);
-    expect(component.find('img').exists()).toBeTruthy();
-    expect(component.find('img').length).toEqual(1);
+    expect(component.find('[data-testid="video-img"]').exists()).toBeTruthy();
+    expect(component.find('[data-testid="video-img"]').prop('alt')).toEqual(
+      'Overview part',
+    );
   });
 
   it('Enzyme: should render false date', () => {

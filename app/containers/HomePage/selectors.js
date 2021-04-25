@@ -7,41 +7,16 @@ import { initialState } from './reducer';
 
 const selectHomePageDomain = state => state.homePage || initialState;
 
-const makeSelectLoading = () =>
-  createSelector(
-    selectHomePageDomain,
-    homePage => homePage.get('loading'),
-  );
-
-const makeSelectError = () =>
-  createSelector(
-    selectHomePageDomain,
-    homePage => homePage.get('error'),
-  );
-
-const makeSelectPopularMovies = () =>
-  createSelector(
-    selectHomePageDomain,
-    homePage => homePage.get('popularMovies'),
-  );
-
-const makeSelectPopularTvShows = () =>
-  createSelector(
-    selectHomePageDomain,
-    homePage => homePage.get('popularTvShows'),
-  );
-
 const makeSelectHomePage = () =>
   createSelector(
     selectHomePageDomain,
     substate => substate,
   );
 
+const makeSelectTerm = () =>
+  createSelector(
+    selectHomePageDomain,
+    homePage => homePage.get('term'),
+  );
 export default makeSelectHomePage;
-export {
-  selectHomePageDomain,
-  makeSelectLoading,
-  makeSelectError,
-  makeSelectPopularMovies,
-  makeSelectPopularTvShows,
-};
+export { selectHomePageDomain, makeSelectTerm };

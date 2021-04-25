@@ -1,37 +1,28 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
-import ReactDOM from 'react-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { Provider } from 'react-redux';
-import configureStore from '../../../configureStore';
+import ShallowRenderer from 'react-test-renderer/shallow';
+import configureStore from 'redux-mock-store';
 import history from '../../../utils/history';
 import App from '../../App';
+const mockStore = configureStore([]);
 
-let container;
-let store;
-let initialState;
-beforeEach(() => {
-  container = document.createElement('div');
-  initialState = {};
-  store = configureStore(initialState, history);
-  document.body.appendChild(container);
-});
-afterEach(() => {
-  document.body.removeChild(container);
-  container = null;
-});
+describe('<App />', () => {
+  let store;
+  beforeEach(() => {
+    store = mockStore({});
+  });
 
-describe('<DetailPage />', () => {
-  it('should render title', () => {
-    act(() => {
-      ReactDOM.render(
-        <Provider store={store}>
-          <ConnectedRouter history={history}>
-            <App />
-          </ConnectedRouter>
-        </Provider>,
-        container,
-      );
-    });
+  it('should render details page', () => {
+    const renderer = new ShallowRenderer();
+    renderer.render(
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <App />
+        </ConnectedRouter>
+      </Provider>,
+    );
+    const component = renderer.getRenderOutput();
+    expect(component).toMatchSnapshot();
   });
 });

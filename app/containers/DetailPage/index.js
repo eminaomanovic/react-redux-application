@@ -26,7 +26,6 @@ import {
   makeSelectMovieType,
 } from './selectors';
 import { loadMovieWithId } from './actions';
-import nomovie from '../../images/nomovie.jpg';
 import yt from '../../images/yt.png';
 import LoadingIndicator from '../../components/LoadingIndicator';
 
@@ -50,22 +49,15 @@ class DetailPage extends React.PureComponent {
   }
 
   render() {
-    if (this.props.loading) {
+    const { loading, movie } = this.props;
+    if (loading) {
       return <LoadingIndicator />;
     }
 
-    const imageUrl =
-      this.props.movie && this.props.movie.poster_path
-        ? `https://image.tmdb.org/t/p/w500${this.props.movie.poster_path}`
-        : nomovie;
-    const noMovieImageAvailableFlag =
-      this.props.movie && this.props.movie.poster_path;
-    const movieLinkValue =
-      !this.props.movieLink || this.props.movieLink === ''
-        ? 'https://www.youtube.com/watch?v=vFPajU-d-Ek'
-        : this.props.movieLink;
+    const imageUrl = `https://image.tmdb.org/t/p/w500${
+      movie && movie.poster_path ? this.props.movie.poster_path : ''
+    }`;
     if (this.props.movie) {
-      const { movie } = this.props;
       return (
         <div className="d-flex flex-column">
           <div className="p-2">
@@ -115,13 +107,12 @@ class DetailPage extends React.PureComponent {
                 </div>
               </div>
               <h2>
-                {/* eslint-disable-next-line no-nested-ternary */}
                 {movie.original_title ? movie.original_title : 'No title'}
-                <a href={movieLinkValue}>
+                <a href={this.props.movieLink}>
                   <img
                     src={yt}
                     style={{ maxWidth: '50px', maxHeight: '50px' }}
-                    alt="Watch a movie trailler"
+                    alt="Watch a movie trailer"
                   />
                 </a>
               </h2>
@@ -149,7 +140,6 @@ class DetailPage extends React.PureComponent {
               <MovieImage
                 className="ui image rounded-5 w-100"
                 src={imageUrl}
-                noMovieImageAvailableFlag={noMovieImageAvailableFlag}
                 alt={movie && movie.overview ? movie.overview : 'No overview'}
               />
             </div>
