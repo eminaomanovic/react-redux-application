@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable';
 import homePageReducer from '../reducer';
 import { changeTerm } from '../actions';
-/* eslint-disable default-case, no-param-reassign */
+
 describe('homePageReducer', () => {
   const stateMutable = {
     term: '',

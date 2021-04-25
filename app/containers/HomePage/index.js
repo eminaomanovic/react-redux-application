@@ -35,10 +35,9 @@ export class HomePage extends React.PureComponent {
           </h3>
           <div>
             <input
-              data-testid="nesto"
               placeholder="Type movie name"
               id="term"
-              className="form-control w-100 form-control-sm h-auto"
+              className="form-control w-100 form-control-sm h-auto input-style"
               type="search"
               value={term}
               onChange={onChangeTerm}

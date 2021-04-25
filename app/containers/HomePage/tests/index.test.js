@@ -12,21 +12,14 @@ import { Provider } from 'react-redux';
 import userEvent from '@testing-library/user-event';
 import { render } from '@testing-library/react';
 import { mount } from 'enzyme';
+import { assertPropTypes } from 'check-prop-types';
 import configureStore from '../../../configureStore';
 import { HomePage } from '../index';
 import { homePageProps } from '../../../utils/mocks';
 
 describe('<HomePage />', () => {
   const store = configureStore();
-  it('should render without throwing an error', () => {
-    const wrapper = mount(
-      <Provider store={store}>
-        <HomePage />
-      </Provider>,
-    );
-    expect(wrapper.find('[data-testid="nesto"]').exists()).toBeTruthy();
-  });
-  it('React testing library: should call ', () => {
+  it('React testing library: Test input in search box ', () => {
     const { getByRole } = render(
       <Provider store={store}>
         <HomePage {...homePageProps} />
@@ -34,6 +27,21 @@ describe('<HomePage />', () => {
     );
     const input = getByRole('searchbox');
     userEvent.type(input, 'New term');
+    userEvent.clear(input);
     expect(homePageProps.onChangeTerm).toHaveBeenCalled();
+  });
+
+  it('Enzyme: Test input in search box ', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <HomePage />
+      </Provider>,
+    );
+    const input = wrapper.find('input');
+    input.simulate('change', { target: { value: 'New term' } });
+    input.simulate('change', { target: { value: '' } });
+  });
+  it('Check prop types', () => {
+    assertPropTypes(HomePage.propTypes, homePageProps, 'prop', HomePage.name);
   });
 });
