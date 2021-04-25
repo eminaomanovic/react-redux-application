@@ -8,8 +8,8 @@
 
 import React from 'react';
 import { render } from '@testing-library/react';
-import { assertPropTypes } from 'check-prop-types';
 import '@testing-library/jest-dom';
+import { assertPropTypes } from 'check-prop-types';
 
 import '../../../setupTests';
 import { shallow } from 'enzyme';

@@ -40,6 +40,7 @@ describe('<HomePage />', () => {
     const input = wrapper.find('input');
     input.simulate('change', { target: { value: 'New term' } });
     input.simulate('change', { target: { value: '' } });
+    expect(homePageProps.onChangeTerm).toHaveBeenCalled();
   });
   it('Check prop types', () => {
     assertPropTypes(HomePage.propTypes, homePageProps, 'prop', HomePage.name);

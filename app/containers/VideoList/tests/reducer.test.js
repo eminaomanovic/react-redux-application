@@ -2,7 +2,6 @@ import { fromJS } from 'immutable';
 import { loadMovies, moviesLoaded, moviesLoadingError } from '../actions';
 import videoListReducer from '../reducer';
 const prettyFormat = require('pretty-format'); // CommonJS
-/* eslint-disable default-case, no-param-reassign */
 describe('homePageReducer', () => {
   const stateMutable = {
     loading: false,
@@ -11,6 +10,7 @@ describe('homePageReducer', () => {
     popularTvShows: null,
   };
   const state = fromJS(stateMutable);
+
   it('returns the initial state', () => {
     expect(videoListReducer(undefined, {})).toEqual(state);
   });

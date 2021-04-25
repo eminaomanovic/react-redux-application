@@ -22,6 +22,7 @@ export function moviesLoadingError(error) {
     error,
   };
 }
+
 export function moviesLoaded(popularMovies, popularTvShows) {
   return {
     type: LOAD_MOVIES_SUCCESS,

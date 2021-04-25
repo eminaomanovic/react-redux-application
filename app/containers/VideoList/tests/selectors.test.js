@@ -13,13 +13,13 @@ describe('VideoList selectors unit tests', () => {
   const errorSelector = makeSelectError();
   const movieSelectorPopularMovies = makeSelectPopularMovies();
   const movieSelectorPopularTvShows = makeSelectPopularTvShows();
+  const globalState = fromJS({
+    loading: false,
+    error: false,
+    popularMovies: null,
+    popularTvShows: null,
+  });
   it('should select the global state', () => {
-    const globalState = fromJS({
-      loading: false,
-      error: false,
-      popularMovies: null,
-      popularTvShows: null,
-    });
     const mockedState = {
       global: globalState,
     };
@@ -27,41 +27,21 @@ describe('VideoList selectors unit tests', () => {
   });
   it('makeSelectLoading test', () => {
     const loading = false;
-    const mockedState = {
-      global: {
-        loading,
-      },
-    };
-    expect(loadingSelector(mockedState)).toEqual(loading);
+    expect(loadingSelector(globalState)).toEqual(loading);
   });
   it('makeSelectError test', () => {
     const error = false;
-    const mockedState = {
-      global: {
-        error,
-      },
-    };
-    expect(errorSelector(mockedState)).toEqual(error);
+    expect(errorSelector(globalState)).toEqual(error);
   });
   it('makeSelectPopularMovies test', () => {
     const popularMovies = null;
-    const mockedState = {
-      global: {
-        popularMovies,
-      },
-    };
-    expect(prettyFormat(movieSelectorPopularMovies(mockedState))).toEqual(
+    expect(prettyFormat(movieSelectorPopularMovies(globalState))).toEqual(
       prettyFormat(popularMovies),
     );
   });
   it('movieSelectorPopularTvShows test', () => {
     const popularTvShows = null;
-    const mockedState = {
-      global: {
-        popularTvShows,
-      },
-    };
-    expect(prettyFormat(movieSelectorPopularTvShows(mockedState))).toEqual(
+    expect(prettyFormat(movieSelectorPopularTvShows(globalState))).toEqual(
       prettyFormat(popularTvShows),
     );
   });

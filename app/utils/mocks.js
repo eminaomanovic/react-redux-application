@@ -67,3 +67,9 @@ export const detailsPageProps = {
   movieLink: null,
   movieType: null,
 };
+export const requestArgs = {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+};
