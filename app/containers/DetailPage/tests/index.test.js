@@ -1,28 +1,31 @@
 import React from 'react';
-import { ConnectedRouter } from 'connected-react-router';
 import { Provider } from 'react-redux';
-import ShallowRenderer from 'react-test-renderer/shallow';
-import configureStore from 'redux-mock-store';
-import history from '../../../utils/history';
-import App from '../../App';
-const mockStore = configureStore([]);
+import { render } from '@testing-library/react';
+import { mount } from 'enzyme';
+import '../../../setupTests';
+import { DetailPage } from '../index';
+import configureStore from '../../../configureStore';
+import { detailsPageProps } from '../../../utils/mocks';
 
-describe('<App />', () => {
-  let store;
-  beforeEach(() => {
-    store = mockStore({});
-  });
-
-  it('should render details page', () => {
-    const renderer = new ShallowRenderer();
-    renderer.render(
+describe('<DetailsPage />', () => {
+  const store = configureStore();
+  it('React testing library: Test input in search box ', () => {
+    const { getByRole } = render(
       <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
+        <DetailPage {...detailsPageProps} />
       </Provider>,
     );
-    const component = renderer.getRenderOutput();
-    expect(component).toMatchSnapshot();
+    const link = getByRole('link');
+    expect(link).toBeDefined();
+  });
+
+  it('Enzyme: Test input in search box ', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <DetailPage {...detailsPageProps} />
+      </Provider>,
+    );
+    const link = wrapper.find('Link');
+    expect(link).toBeDefined();
   });
 });

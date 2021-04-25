@@ -25,7 +25,7 @@ const AppWrapper = styled.div`
 
 export default function App() {
   return (
-    <AppWrapper>
+    <AppWrapper data-testid="app">
       <Router history={history}>
         <Switch>
           <Route exact path="/" component={HomePage} history={history} />

@@ -54,3 +54,16 @@ export const homePageProps = {
   term: '',
   onChangeTerm: jest.fn(),
 };
+
+export const detailsPageProps = {
+  error: false,
+  getMovieWithId: jest.fn(),
+  loading: false,
+  id: null,
+  location: {
+    pathname: '/detailPage/movie/460465',
+  },
+  movie: mockedVideo,
+  movieLink: null,
+  movieType: null,
+};

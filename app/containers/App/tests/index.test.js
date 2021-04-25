@@ -1,31 +1,30 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import ShallowRenderer from 'react-test-renderer/shallow';
-import configureStore from 'redux-mock-store';
-import { ConnectedRouter } from 'connected-react-router/immutable';
-import history from 'utils/history';
+import { render } from '@testing-library/react';
+import { mount } from 'enzyme';
 import App from '../index';
-const mockStore = configureStore([]);
+import '../../../setupTests';
+import configureStore from '../../../configureStore';
 
 describe('<App />', () => {
-  let store;
-  beforeEach(() => {
-    store = mockStore({
-      loading: true,
-      error: false,
-    });
-  });
-
-  it('should render with videos', () => {
-    const renderer = new ShallowRenderer();
-    renderer.render(
+  const store = configureStore();
+  it('React testing library: Test input in search box ', () => {
+    const { getByTestId } = render(
       <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <App />
-        </ConnectedRouter>
+        <App />
       </Provider>,
     );
-    const component = renderer.getRenderOutput();
-    expect(component).toMatchSnapshot();
+    const input = getByTestId('app');
+    expect(input).toBeDefined();
+  });
+
+  it('Enzyme: Test input in search box ', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+    );
+    const input = wrapper.find('div');
+    expect(input).toBeDefined();
   });
 });
