@@ -20,7 +20,7 @@ import { makeSelectTerm } from './selectors';
 import VideoList from '../VideoList/Loadable';
 import { loadMovies } from '../VideoList/actions';
 
-class HomePage extends React.PureComponent {
+export class HomePage extends React.PureComponent {
   render() {
     const { term, onChangeTerm } = this.props;
     return (
@@ -35,6 +35,7 @@ class HomePage extends React.PureComponent {
           </h3>
           <div>
             <input
+              data-testid="nesto"
               placeholder="Type movie name"
               id="term"
               className="form-control w-100 form-control-sm h-auto"
@@ -55,7 +56,7 @@ HomePage.propTypes = {
   term: PropTypes.string,
 };
 
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
     onChangeTerm: e => {
       dispatch(changeTerm(e.target.value));

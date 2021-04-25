@@ -7,18 +7,33 @@
  */
 
 import '../../../setupTests';
+import React from 'react';
+import { Provider } from 'react-redux';
+import userEvent from '@testing-library/user-event';
+import { render } from '@testing-library/react';
+import { mount } from 'enzyme';
+import configureStore from '../../../configureStore';
+import { HomePage } from '../index';
+import { homePageProps } from '../../../utils/mocks';
 
 describe('<HomePage />', () => {
-  // it('Test mapDispatchToProps functionality', () => {
-  //   const { container } = render(<HomePage {...homePageProps} />);
-  //   const dispatch = jest.fn();
-  //   mapDispatchToProps(dispatch).getMovies();
-  //   fireEvent.load(container, container.getMovies);
-  //   expect(homePageProps.getMovies).toHaveBeenCalledTimes(1);
-  // });
-  // it('Enzyme: Check link existence', () => {
-  //   const component = shallow(<HomePage />);
-  //   expect(component.find('Link').exists()).toBeTruthy();
-  //   expect(component.find('Link').length).toEqual(1);
-  // });
+  const store = configureStore();
+  it('should render without throwing an error', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <HomePage />
+      </Provider>,
+    );
+    expect(wrapper.find('[data-testid="nesto"]').exists()).toBeTruthy();
+  });
+  it('React testing library: should call ', () => {
+    const { getByRole } = render(
+      <Provider store={store}>
+        <HomePage {...homePageProps} />
+      </Provider>,
+    );
+    const input = getByRole('searchbox');
+    userEvent.type(input, 'New term');
+    expect(homePageProps.onChangeTerm).toHaveBeenCalled();
+  });
 });

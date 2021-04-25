@@ -43,10 +43,14 @@ export const movies = {
   ],
 };
 
-export const homePageProps = {
+export const videoListProps = {
   loading: false,
   error: false,
   popularMovies: null,
   popularTvShows: null,
   getMovies: jest.fn(),
+};
+export const homePageProps = {
+  term: '',
+  onChangeTerm: jest.fn(),
 };
