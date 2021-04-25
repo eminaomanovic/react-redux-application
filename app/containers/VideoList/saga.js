@@ -8,7 +8,6 @@ import { makeSelectTerm } from '../HomePage/selectors';
 export function* getMovies() {
   try {
     const term = yield select(makeSelectTerm());
-    console.log(term);
     const [popularMovies, popularTvShows] = yield all([
       call(
         request,

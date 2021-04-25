@@ -24,9 +24,9 @@ describe('homePageReducer', () => {
     stateMutable.loading = false;
     stateMutable.popularTvShows = null;
     stateMutable.popularTvShows = null;
-    expect(prettyFormat(videoListReducer(state, moviesLoaded(null, null)))).toEqual(
-      prettyFormat(fromJS(stateMutable)),
-    );
+    expect(
+      prettyFormat(videoListReducer(state, moviesLoaded(null, null))),
+    ).toEqual(prettyFormat(fromJS(stateMutable)));
   });
   it('should handle the LOAD_MOVIES_ERRORS action correctly', () => {
     stateMutable.loading = false;

@@ -76,7 +76,7 @@ describe('VideoItem index tests', () => {
       component
         .children()
         .get(0)
-        .props.children[4].props.children.includes('No release date available'),
+        .props.children[3].props.children.includes('No release date available'),
     ).toBe(true);
   });
 

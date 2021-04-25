@@ -1,8 +1,4 @@
-import {
-  loadMovies,
-  moviesLoaded,
-  moviesLoadingError,
-} from '../actions';
+import { loadMovies, moviesLoaded, moviesLoadingError } from '../actions';
 import {
   LOAD_MOVIES,
   LOAD_MOVIES_SUCCESS,

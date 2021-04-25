@@ -6,10 +6,7 @@
  *
  */
 
-import React from 'react';
-import { shallow } from 'enzyme';
 import '../../../setupTests';
-import HomePage from '../index';
 
 describe('<HomePage />', () => {
   // it('Test mapDispatchToProps functionality', () => {
@@ -19,10 +16,9 @@ describe('<HomePage />', () => {
   //   fireEvent.load(container, container.getMovies);
   //   expect(homePageProps.getMovies).toHaveBeenCalledTimes(1);
   // });
-
-  it('Enzyme: Check link existence', () => {
-    const component = shallow(<HomePage />);
-    expect(component.find('Link').exists()).toBeTruthy();
-    expect(component.find('Link').length).toEqual(1);
-  });
+  // it('Enzyme: Check link existence', () => {
+  //   const component = shallow(<HomePage />);
+  //   expect(component.find('Link').exists()).toBeTruthy();
+  //   expect(component.find('Link').length).toEqual(1);
+  // });
 });

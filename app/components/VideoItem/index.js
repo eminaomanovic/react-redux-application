@@ -12,7 +12,7 @@ import history from '../../utils/history';
 
 class VideoItem extends React.PureComponent {
   render() {
-    const {video} = this.props;
+    const { video } = this.props;
     if (video) {
       const firstAirDate = video.first_air_date ? video.first_air_date : null;
       return (

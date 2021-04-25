@@ -1,8 +1,5 @@
 import { fromJS } from 'immutable';
-import {
-  selectHomePageDomain,
-  makeSelectTerm,
-} from '../selectors';
+import { selectHomePageDomain, makeSelectTerm } from '../selectors';
 
 describe('HomePage selectors unit tests', () => {
   const termSelector = makeSelectTerm();
