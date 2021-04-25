@@ -48,16 +48,16 @@ export const videoListProps = {
   error: false,
   popularMovies: null,
   popularTvShows: null,
-  getMovies: jest.fn(),
+  getMovies: () => {},
 };
 export const homePageProps = {
   term: '',
-  onChangeTerm: jest.fn(),
+  onChangeTerm: () => {},
 };
 
 export const detailsPageProps = {
   error: false,
-  getMovieWithId: jest.fn(),
+  getMovieWithId: () => {},
   loading: false,
   id: null,
   location: {

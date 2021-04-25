@@ -19,6 +19,7 @@ import { homePageProps } from '../../../utils/mocks';
 
 describe('<HomePage />', () => {
   const store = configureStore();
+  homePageProps.onChangeTerm = jest.fn();
   it('React testing library: Test input in search box ', () => {
     const { getByRole } = render(
       <Provider store={store}>
