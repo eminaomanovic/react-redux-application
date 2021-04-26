@@ -20,6 +20,7 @@ import { homePageProps } from '../../../utils/mocks';
 describe('<HomePage />', () => {
   const store = configureStore();
   homePageProps.onChangeTerm = jest.fn();
+
   it('React testing library: Test input in search box ', () => {
     const { getByRole } = render(
       <Provider store={store}>
@@ -43,6 +44,7 @@ describe('<HomePage />', () => {
     input.simulate('change', { target: { value: '' } });
     expect(homePageProps.onChangeTerm).toHaveBeenCalled();
   });
+
   it('Check prop types', () => {
     assertPropTypes(HomePage.propTypes, homePageProps, 'prop', HomePage.name);
   });
@@ -54,8 +56,6 @@ describe('<HomePage />', () => {
       </Provider>,
     );
     const dispatch = jest.fn();
-    // For the `mapDispatchToProps`, call it directly but pass in
-    // a mock function and check the arguments passed in are as expected
     mapDispatchToProps(dispatch).onChangeTerm({ target: { value: 'new' } });
     const input = getByRole('searchbox');
     userEvent.type(input, 'new');
