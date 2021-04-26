@@ -12,7 +12,7 @@ import '@testing-library/jest-dom';
 import { assertPropTypes } from 'check-prop-types';
 
 import '../../../setupTests';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import VideoItem from '../index';
 import { mockedVideo, mockedVideoNoReleaseDate } from '../../../utils/mocks';
@@ -38,12 +38,12 @@ describe('VideoItem index tests', () => {
   });
 
   it('Enzyme: Check link element classes', () => {
-    const component = shallow(<VideoItem video={mockedVideo} />);
+    const component = mount(<VideoItem video={mockedVideoNoReleaseDate} />);
     expect(
       component
-        .dive()
-        .children()
-        .get(0).props.className,
+        .find('Link')
+        .first()
+        .props().className,
     ).toEqual('video-item item shadow-lg d-flex flex-column');
   });
 
@@ -63,21 +63,21 @@ describe('VideoItem index tests', () => {
     );
   });
 
-  it('Enzyme: should render false date', () => {
+  it('React testing library: should render false date', () => {
     const { getByText } = render(
       <VideoItem video={mockedVideoNoReleaseDate} />,
     );
     getByText('No release date available');
   });
 
-  it('React testing library: should render false date', () => {
-    const component = shallow(<VideoItem video={mockedVideoNoReleaseDate} />);
+  it('Enzyme: should render false date', () => {
+    const component = mount(<VideoItem video={mockedVideoNoReleaseDate} />);
     expect(
       component
-        .children()
-        .get(0)
-        .props.children[3].props.children.includes('No release date available'),
-    ).toBe(true);
+        .find('Link')
+        .first()
+        .props().children[3].props.children,
+    ).toEqual('No release date available');
   });
 
   it('Check prop types', () => {
